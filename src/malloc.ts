@@ -63,7 +63,6 @@ class LinkedListAllocator {
       current = next;
       next = current + Number(derefU64(current + 8)) + 16;
     }
-    console.log(current);
 
     if (derefU64(current) === FREE) {
       let size = Number(derefU64(current + 8));
@@ -84,9 +83,9 @@ export function malloc(size: number): number {
   let remainder = size % 8;
 
   if (remainder != 0) {
-      size += 8 - remainder;
+    size += 8 - remainder;
   }
-  return lla.alloc(size + 8 - remainder);
+  return lla.alloc(size);
 }
 
 /**
@@ -96,4 +95,3 @@ export function malloc(size: number): number {
 export function free(addr: number) {
   lla.free(addr);
 }
-
