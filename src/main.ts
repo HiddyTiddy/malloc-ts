@@ -1,5 +1,5 @@
-import { malloc } from "./malloc";
-import { setU64, dumpMem } from "./mem";
+import { free, malloc } from "./malloc";
+import { dumpMem, setU64 } from "./mem";
 
 const sizeof_int = 8;
 
@@ -23,6 +23,12 @@ function main() {
     console.log(dumpMem(0, 100));
     // -------------------------------------------------
   }
+  let arrays = [malloc(10), malloc(10), malloc(10), malloc(10)];
+
+  free(arrays[2]);
+  free(arrays[1]);
+  free(arrays[3]);
+  console.log(dumpMem(0, 200));
 }
 
 main();
